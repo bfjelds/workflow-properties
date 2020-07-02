@@ -31,17 +31,18 @@ jobs:
 
     - name: Get commit
       if: github.event_name == 'pull_request'
-      id: get-foo
+      id: get-foo-pr
       run: echo "::set-output name=foo::${{ github.event.pull_request.title }}"
     - name: Get commit
       if: github.event_name == 'push'
-      id: get-foo
+      id: get-foo-push
       run: echo "::set-output name=foo::${{ github.event.commits[0].message }}"
 
     - name: Output stuff
       run: |
         echo "context: ${{ steps.git-context.outputs.message }}"
-        echo "context: ${{ steps.get-foo.outputs.foo }}"
+        echo "context: ${{ steps.get-foo-pr.outputs.foo }}"
+        echo "context: ${{ steps.get-foo-push.outputs.foo }}"
         
     # # If PR title does contain "[SAME VERSION]", then do not check that version.txt is different from
     # # what is in master.
