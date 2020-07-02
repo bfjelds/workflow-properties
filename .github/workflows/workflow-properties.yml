@@ -1,0 +1,34 @@
+name: Check versioning
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  release:
+    types:
+      - published
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Output stuff
+      run: |
+        echo "event name: ${{ github.event_name }}"
+        echo "github.event.pull_request.title: ${{ github.event.pull_request.title }}"
+        echo "github.event.head_commit.message: ${{ github.event.head_commit.message }}"
+        echo "github.event.commits[0].message: ${{ github.event.commits[0].message }}"
+        
+    # # If PR title does contain "[SAME VERSION]", then do not check that version.txt is different from
+    # # what is in master.
+    # - if: github.event_name == 'pull_request' && contains(github.event.pull_request.title, '[SAME VERSION]') == true
+    #   name: Run version check
+    #   run: ./version.sh -c -s
