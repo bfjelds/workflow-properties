@@ -23,6 +23,7 @@ jobs:
     - name: Output stuff
       run: |
         echo "event name: ${{ github.event_name }}"
+        echo "event: ${{ github.event }}"
         echo "github.event.pull_request.title: ${{ github.event.pull_request.title }}"
         echo "github.event.head_commit.message: ${{ github.event.head_commit.message }}"
         echo "github.event.commits[0].message: ${{ github.event.commits[0].message }}"
