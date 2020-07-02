@@ -20,13 +20,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Get git context
+      id: git-context
+      run: echo "::set-output name=message::$(git log --no-merges -1 --oneline)"
+
     - name: Output stuff
       run: |
-        echo "event name: ${{ github.event_name }}"
-        echo "event: ${{ github.event }}"
-        echo "github.event.pull_request.title: ${{ github.event.pull_request.title }}"
-        echo "github.event.head_commit.message: ${{ github.event.head_commit.message }}"
-        echo "github.event.commits[0].message: ${{ github.event.commits[0].message }}"
+        echo "context: ${{ steps.git-context.outputs.message }}"
         
     # # If PR title does contain "[SAME VERSION]", then do not check that version.txt is different from
     # # what is in master.
