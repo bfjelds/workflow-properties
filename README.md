@@ -1,3 +1,1 @@
-# workflow-properties
-hi
 hi
