@@ -29,9 +29,19 @@ jobs:
       id: git-context
       run: echo "::set-output name=message::$(git log --format=%B -n 1 ${{ github.event.after }})"
 
+    - name: Get commit
+      if: github.event_name == 'pull_request'
+      id: get-foo
+      run: echo "::set-output name=foo::${{ github.event.pull_request.title }}"
+    - name: Get commit
+      if: github.event_name == 'push'
+      id: get-foo
+      run: echo "::set-output name=foo::${{ github.event.commits[0].message }}"
+
     - name: Output stuff
       run: |
         echo "context: ${{ steps.git-context.outputs.message }}"
+        echo "context: ${{ steps.get-foo.outputs.foo }}"
         
     # # If PR title does contain "[SAME VERSION]", then do not check that version.txt is different from
     # # what is in master.
