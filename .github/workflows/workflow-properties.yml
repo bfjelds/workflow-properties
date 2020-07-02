@@ -35,9 +35,9 @@ jobs:
         !contains(github.event.commits[0].message, '[ALLOW INTERMEDIATE BUILDS]')
       run: |
         echo Nunya
-        echo ${{ github.event.pull_request.title }}
-        echo ${{ github.event.commits[0].message }}
-        echo [ALLOW INTERMEDIATE BUILDS]
+        echo "${{ github.event.pull_request.title }}"
+        echo "${{ github.event.commits[0].message }}"
+        echo "[ALLOW INTERMEDIATE BUILDS]"
 
     - name: No ALLOW INTERMEDIATE BUILDS
       if: >-
@@ -45,9 +45,9 @@ jobs:
         contains(github.event.commits[0].message, '[ALLOW INTERMEDIATE BUILDS]')
       run: |
         echo Sumya
-        echo ${{ github.event.pull_request.title }}
-        echo ${{ github.event.commits[0].message }}
-        echo [ALLOW INTERMEDIATE BUILDS]
+        echo "${{ github.event.pull_request.title }}"
+        echo "${{ github.event.commits[0].message }}"
+        echo "[ALLOW INTERMEDIATE BUILDS]"
 
     - name: Get commit
       if: github.event_name == 'pull_request'
